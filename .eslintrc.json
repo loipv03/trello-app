@@ -5,6 +5,7 @@
   ],
   "rules": {
     "@typescript-eslint/no-empty-object-type": "off",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "@typescript-eslint/no-unused-expressions": "off"
   }
 }

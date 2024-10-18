@@ -8,8 +8,6 @@ import { useSignupMutation } from '@/app/redux/apiSlices/auth';
 import { toast } from 'sonner';
 import { useEffect, useState } from 'react';
 import { GrFormClose } from "react-icons/gr";
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { SerializedError } from '@reduxjs/toolkit';
 import { IError } from '@/app/types/errResponse';
 
 const formSchema = z.object({

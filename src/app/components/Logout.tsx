@@ -14,7 +14,9 @@ const Logout = () => {
     }
 
     useEffect(() => {
-        isSuccess && router.push('/login')
+        if (isSuccess) {
+            router.push('/login')
+        }
     }, [isSuccess])
 
     return (
