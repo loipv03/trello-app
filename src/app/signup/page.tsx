@@ -10,7 +10,9 @@ const Signup = () => {
     const cookieStore = cookies()
 
     const access_token = cookieStore.get('access_token')
-    access_token && redirect('/')
+    if (access_token) {
+        redirect('/')
+    }
     return (
         <div className="w-full h-screen grid lg:grid-rows-[50px_auto] grid-rows-[100px_auto] gap-y-[30px] ">
             <div className="max-w-full h-full mt-[10px] ml-[10px] grid lg:place-items-start place-items-center">

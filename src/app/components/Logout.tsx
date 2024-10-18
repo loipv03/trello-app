@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 
 const Logout = () => {
-    const [logout, { isLoading, isSuccess, isError, error }] = useLogoutMutation()
+    const [logout, { isSuccess }] = useLogoutMutation()
     const router = useRouter()
 
     const handleLogout = async () => {

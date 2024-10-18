@@ -70,7 +70,9 @@ const LoginForm = () => {
             })
         }
 
-        !isLoading && reset()
+        if (!isLoading) {
+            reset();
+        }
     }, [apiErr, isError, isSuccess, isLoading])
 
     return (
