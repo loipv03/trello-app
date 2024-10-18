@@ -1,4 +1,4 @@
-import { ILogin, ISignup, IUser } from '@/app/types/user';
+import { ILogin, ISignup } from '@/app/types/user';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL
@@ -23,10 +23,17 @@ const apiSlice = createApi({
                 credentials: 'include',
                 body: user
             })
-        })
+        }),
 
+        logout: builder.mutation<{ message: string }, undefined>({
+            query: () => ({
+                url: 'logout',
+                method: 'post',
+                credentials: 'include',
+            })
+        })
     }),
 });
 
 export default apiSlice
-export const { useSignupMutation, useLoginMutation } = apiSlice;
+export const { useSignupMutation, useLoginMutation, useLogoutMutation } = apiSlice;

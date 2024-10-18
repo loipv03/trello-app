@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import ClientProvider from "@/app/ClientProvider";
+import StoreProvider from "@/app/StoreProvider";
 import { Toaster } from "@/components/ui/sonner";
 
 const inter = Poppins({
@@ -24,9 +24,9 @@ export default function RootLayout({
       <body
         className={`${inter.className}`}
       >
-        <ClientProvider>
+        <StoreProvider>
           {children}
-        </ClientProvider>
+        </StoreProvider>
         <Toaster />
       </body>
     </html>

@@ -4,10 +4,12 @@ import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useSignupMutation } from '@/app/redux/apiSlice';
+import { useSignupMutation } from '@/app/redux/apiSlices/auth';
 import { toast } from 'sonner';
 import { useEffect, useState } from 'react';
 import { GrFormClose } from "react-icons/gr";
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
 import { IError } from '@/app/types/errResponse';
 
 const formSchema = z.object({
@@ -25,23 +27,19 @@ const SignupForm = () => {
         resolver: zodResolver(formSchema),
     })
 
+    const [signup, { isLoading, isSuccess, isError, error }] = useSignupMutation()
     const [apiErr, setApiErr] = useState<IError>()
 
-    const [signup, { isLoading, isSuccess, isError }] = useSignupMutation()
-
     const onSubmit = async (signupRequest: z.infer<typeof formSchema>) => {
-        try {
-            await signup(signupRequest).unwrap()
-        } catch (error) {
-            const apiErr = error as IError
-            setApiErr(apiErr)
-        }
+        await signup(signupRequest)
     }
 
     useEffect(() => {
-        apiErr && isError &&
+        isError && setApiErr(error as IError)
+
+        isError &&
             toast.error("Sign Up Failed", {
-                description: <span className='text-white'>{apiErr.data.message === 'Duplicate' ? 'Username or email already exists' : apiErr.data.message}</span>,
+                description: <span className='text-white'>{apiErr?.data.message === 'Duplicate' ? 'Username or email already exists' : apiErr?.data.message}</span>,
                 position: 'top-right',
                 style: {
                     background: '#ff0000',
@@ -74,8 +72,8 @@ const SignupForm = () => {
             })
 
         !isLoading && reset()
-    }, [apiErr, isError, isSuccess, isLoading])
 
+    }, [apiErr, isError, isSuccess, isLoading])
     return (
         <div className='w-full h-max lg:p-10 lg:rounded-lg lg:border border-slate-200'>
             <div className='lg:block hidden w-full font-semibold text-3xl mb-[30px]'>Sign Up</div>
