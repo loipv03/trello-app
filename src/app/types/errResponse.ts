@@ -1,6 +1,6 @@
 export interface IError {
     data: {
-        errors: string[],
+        errors?: string[],
         message: string
     },
     status: number

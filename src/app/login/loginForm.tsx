@@ -4,12 +4,12 @@ import { z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useLoginMutation } from '@/app/redux/apiSlice';
+import { useLoginMutation } from '@/app/redux/apiSlices/auth';
 import { toast } from 'sonner';
 import { useEffect, useState } from 'react';
 import { GrFormClose } from "react-icons/gr";
-import { IError } from '@/app/types/errResponse';
 import { useRouter } from 'next/navigation';
+import { IError } from '@/app/types/errResponse';
 
 const formSchema = z.object({
     email: z.string().email('Invalid email address'),
@@ -22,25 +22,21 @@ const LoginForm = () => {
         resolver: zodResolver(formSchema),
     })
 
+
     const router = useRouter()
 
+    const [login, { isLoading, isSuccess, isError, error }] = useLoginMutation()
     const [apiErr, setApiErr] = useState<IError>()
 
-    const [login, { isLoading, isSuccess, isError }] = useLoginMutation()
-
     const onSubmit = async (loginRequest: z.infer<typeof formSchema>) => {
-        try {
-            await login(loginRequest).unwrap()
-        } catch (error) {
-            const apiErr = error as IError
-            setApiErr(apiErr)
-        }
+        await login(loginRequest)
     }
 
     useEffect(() => {
-        apiErr && isError &&
+        if (isError) {
+            setApiErr(error as IError)
             toast.error("Login Failed", {
-                description: <span className='text-white'>{apiErr.data?.message}</span>,
+                description: <span className='text-white'>{apiErr?.data.message}</span>,
                 position: 'top-right',
                 style: {
                     background: '#ff0000',
@@ -54,8 +50,10 @@ const LoginForm = () => {
                     onClick: () => undefined,
                 },
             })
+        }
 
-        isSuccess &&
+        if (isSuccess) {
+            router.push('/')
             toast.success("Login Success", {
                 position: 'top-right',
                 style: {
@@ -69,7 +67,8 @@ const LoginForm = () => {
                     label: <GrFormClose className='size-6' />,
                     onClick: () => undefined,
                 },
-            }) && router.push('/')
+            })
+        }
 
         !isLoading && reset()
     }, [apiErr, isError, isSuccess, isLoading])

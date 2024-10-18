@@ -9,7 +9,7 @@ const Login = () => {
     const cookieStore = cookies()
 
     const access_token = cookieStore.get('access_token')
-    // access_token && redirect('/')
+    access_token && redirect('/')
 
     return (
         <div className="w-full h-screen grid lg:grid-rows-[50px_auto] grid-rows-[100px_auto] gap-y-[30px] ">
