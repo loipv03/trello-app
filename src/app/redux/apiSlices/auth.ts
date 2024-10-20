@@ -4,8 +4,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 const baseUrl = process.env.NEXT_PUBLIC_API_URL
 
 const apiSlice = createApi({
-    reducerPath: 'User',
-    tagTypes: ['User'],
+    reducerPath: 'user',
+    tagTypes: ['User', "Workspace"],
     baseQuery: fetchBaseQuery({ baseUrl: `${baseUrl}/api` }),
     endpoints: (builder) => ({
         signup: builder.mutation<{ message: string }, ISignup>({
@@ -31,9 +31,17 @@ const apiSlice = createApi({
                 method: 'post',
                 credentials: 'include',
             })
-        })
+        }),
+        getAllWorkspaces: builder.query<{ workspaces: any[] }, void>({
+            query: () => ({
+                url: 'workspaces',
+                method: 'GET',
+                credentials: 'include',
+            }),
+            providesTags: ['Workspace'],
+        }),
     }),
 });
 
 export default apiSlice
-export const { useSignupMutation, useLoginMutation, useLogoutMutation } = apiSlice;
+export const { useSignupMutation, useLoginMutation, useLogoutMutation, useGetAllWorkspacesQuery } = apiSlice;
