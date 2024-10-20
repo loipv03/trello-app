@@ -7,7 +7,9 @@ export default function Home() {
 
   const access_token = cookieStore.getAll()
 
-  if (!access_token.length) {
+  if (access_token.length) {
+    console.log(access_token);
+
     // redirect('/login')
   }
   return (
