@@ -8,7 +8,7 @@ export default function Home() {
   const access_token = cookieStore.getAll()
 
   if (!access_token.length) {
-    redirect('/login')
+    // redirect('/login')
   }
   return (
     <div className="w-full grid justify-center mt-20">

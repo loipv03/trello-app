@@ -36,7 +36,7 @@ const LoginForm = () => {
         if (isError) {
             setApiErr(error as IError)
             toast.error("Login Failed", {
-                description: <span className='text-white'>{apiErr?.data.message}</span>,
+                description: <span className='text-white'>{apiErr?.data?.message}</span>,
                 position: 'top-right',
                 style: {
                     background: '#ff0000',
