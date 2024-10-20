@@ -14,10 +14,6 @@ const Logout = () => {
         await logout(undefined).unwrap()
     }
 
-    const handleGetAllWorkspaces = async () => {
-        useGetAllWorkspacesQuery()
-    }
-
     useEffect(() => {
         if (isSuccess) {
             router.push('/login')
@@ -31,7 +27,6 @@ const Logout = () => {
     return (
         <div className={`w-[100px] h-[50px] `}>
             <Button type='button' onClick={handleLogout} className="size-full bg-orange-500">Logout</Button>
-            <Button type='button' onClick={handleGetAllWorkspaces} className="size-full bg-orange-500">getAllWorkspaces</Button>
         </div >
     )
 }
