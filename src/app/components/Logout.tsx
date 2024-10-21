@@ -6,17 +6,12 @@ import { useCallback, useEffect } from "react"
 
 const Logout = () => {
     const [logout, { isSuccess }] = useLogoutMutation()
+    
     const router = useRouter()
 
     const handleLogout = useCallback(async () => {
-        await logout().unwrap()
+        await logout()
     }, [logout])
-
-    useEffect(() => {
-        if (isSuccess) {
-            router.push('/login')
-        }
-    }, [isSuccess, router])
 
     return (
         <div className={`w-[100px] h-[50px] `}>

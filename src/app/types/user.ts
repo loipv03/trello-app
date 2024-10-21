@@ -13,4 +13,6 @@ export interface ISignup extends Pick<IUser, 'name' | 'email' | 'password'> {
     confirmPassword: string;
 }
 
-export interface ILogin extends Pick<IUser, 'email' | 'password'> { }
+export interface ILogin extends Pick<IUser, 'password'> {
+    email: string
+}
