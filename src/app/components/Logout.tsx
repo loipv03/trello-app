@@ -1,21 +1,22 @@
 "use client"
-
-import { useLogoutMutation } from "@/app/redux/apiSlices/auth"
 import { Button } from "@/components/ui/button"
+import { useLogoutMutation } from "@/redux/api/auth"
 import { useRouter } from "next/navigation"
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 
 const Logout = () => {
-    const [logout, { isLoading, isSuccess, isError, error }] = useLogoutMutation()
+    const [logout, { isSuccess }] = useLogoutMutation()
     const router = useRouter()
 
-    const handleLogout = async () => {
-        await logout(undefined).unwrap()
-    }
+    const handleLogout = useCallback(async () => {
+        await logout().unwrap()
+    }, [logout])
 
     useEffect(() => {
-        isSuccess && router.push('/login')
-    }, [isSuccess])
+        if (isSuccess) {
+            router.push('/login')
+        }
+    }, [isSuccess, router])
 
     return (
         <div className={`w-[100px] h-[50px] `}>

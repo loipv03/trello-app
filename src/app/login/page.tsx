@@ -3,14 +3,7 @@ import Logo from '../../../public/Logo.png'
 import Saly from '../../../public/auth_image.png'
 import Link from "next/link"
 import LoginForm from "@/app/login/loginForm"
-import { cookies } from "next/headers"
-import { redirect } from "next/navigation"
 const Login = () => {
-    const cookieStore = cookies()
-
-    const access_token = cookieStore.get('access_token')
-    access_token && redirect('/')
-
     return (
         <div className="w-full h-screen grid lg:grid-rows-[50px_auto] grid-rows-[100px_auto] gap-y-[30px] ">
             <div className="max-w-full h-full mt-[10px] ml-[10px] grid lg:place-items-start place-items-center">
@@ -31,7 +24,7 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-full h-full grid place-items-center mt-[-50px] ">
+                <div className="w-full h-full max-h-[430px] lg:h-full grid place-items-center">
                     <LoginForm />
                 </div>
             </div>
