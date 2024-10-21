@@ -3,16 +3,8 @@ import Logo from '../../../public/Logo.png'
 import Saly from '../../../public/auth_image.png'
 import Link from "next/link"
 import SignupForm from "@/app/signup/signupForm"
-import { cookies } from "next/headers"
-import { redirect } from "next/navigation"
 
 const Signup = () => {
-    const cookieStore = cookies()
-
-    const access_token = cookieStore.get('access_token')
-    if (access_token) {
-        redirect('/')
-    }
     return (
         <div className="w-full h-screen grid lg:grid-rows-[50px_auto] grid-rows-[100px_auto] gap-y-[30px] ">
             <div className="max-w-full h-full mt-[10px] ml-[10px] grid lg:place-items-start place-items-center">
@@ -33,7 +25,7 @@ const Signup = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-full h-full">
+                <div className="w-full h-full max-h-[625px]">
                     <SignupForm />
                 </div>
             </div>
