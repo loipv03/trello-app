@@ -1,7 +1,7 @@
 export interface IError {
     data: {
         errors?: string[],
-        message: string
+        message?: string
     },
     status: number
 }
