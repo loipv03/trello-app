@@ -24,7 +24,7 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-full h-full max-h-[430px] lg:h-full grid place-items-center">
+                <div className="w-full h-max max-h-[430px] lg:h-full grid">
                     <LoginForm />
                 </div>
             </div>

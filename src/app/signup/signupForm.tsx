@@ -16,7 +16,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
-import { AiFillExclamationCircle } from 'react-icons/ai';
+import { AiFillExclamationCircle, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
@@ -31,10 +31,12 @@ const formSchema = z.object({
 
 const SignupForm = () => {
     const [showDialog, setShowDialog] = useState<boolean>(false)
+    const [showPassword, setShowPassword] = useState<boolean>(false)
+    const [showConfirmPassword, setConfirmShowPassword] = useState<boolean>(false)
 
     const router = useRouter()
 
-    const { register, handleSubmit, formState: { errors } } = useForm<z.infer<typeof formSchema>>({
+    const { register, handleSubmit, formState: { errors }, watch } = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
     })
 
@@ -50,25 +52,61 @@ const SignupForm = () => {
     }
 
     return (
-        <div className='w-full h-full lg:p-10 lg:rounded-lg lg:border border-slate-200'>
+        <div className='w-full h-max lg:p-10 lg:rounded-lg lg:border border-slate-200'>
             <div className='lg:block hidden w-full font-bold text-4xl mb-[30px] text-center'>Sign Up</div>
             <form onSubmit={handleSubmit(onSubmit)} className='w-full h-max'>
                 <fieldset disabled={isLoading} className='w-full h-max grid grid-cols-1 gap-y-4'>
                     <div className='w-full h-max'>
-                        <Input {...register('name')} placeholder="Name" className={`w-full h-[50px] border border-none bg-slate-200 placeholder:text-xs focus-visible:ring-0  ${errors.name && 'border-solid border-red-500'}`} />
-                        <p className='min-h-7 text-xs text-red-500 pt-2'>{errors.name && errors.name.message}</p>
+                        <Input
+                            {...register('name')} placeholder="Name"
+                            className={`w-full h-[50px] border border-none bg-slate-200 placeholder:text-xs focus-visible:ring-0  ${errors.name && 'border-solid border-red-500'}`}
+                        />
+                        <p className={`text-xs text-red-500 transition-all duration-500 ${errors.name ? 'max-h-max h-4 my-1' : 'h-0'}`}>
+                            {errors.name && errors.name.message}
+                        </p>
                     </div>
                     <div className='w-full h-max'>
-                        <Input {...register('email')} placeholder="Email" className={`w-full h-[50px] border-none bg-slate-200 placeholder:text-xs focus-visible:ring-0  ${errors.email && 'border-solid border-red-500'}`} />
-                        <p className='min-h-7 text-xs text-red-500 pt-2'>{errors.email && errors.email.message}</p>
+                        <Input
+                            {...register('email')} placeholder="Email"
+                            className={`w-full h-[50px] border-none bg-slate-200 placeholder:text-xs focus-visible:ring-0  ${errors.email && 'border-solid border-red-500'}`}
+                        />
+                        <p className={`text-xs text-red-500 transition-all duration-500 ${errors.email ? 'max-h-max h-4 my-1' : 'h-0'}`}>
+                            {errors.email && errors.email.message}
+                        </p>
                     </div>
                     <div className='w-full h-max'>
-                        <Input {...register('password')} placeholder="Password" type='password' className={`w-full h-[50px] border-none bg-slate-200 placeholder:text-xs focus-visible:ring-0  ${errors.password && 'border-solid border-red-500'}`} />
-                        <p className='min-h-7 text-xs text-red-500 pt-2'>{errors.password && errors.password.message}</p>
+                        <div className="w-full h-max relative">
+                            <Input
+                                {...register('password')} placeholder="Password" type={showPassword ? 'text' : 'password'}
+                                className={`w-full h-[50px] pr-10 border-none bg-slate-200 placeholder:text-xs focus-visible:ring-0  ${errors.password && 'border-solid border-red-500'}`}
+                            />
+                            {watch('password') && (
+                                <>
+                                    <AiOutlineEye onClick={() => setShowPassword(!showPassword)} className={`fill-slate-500 cursor-pointer size-6 absolute top-[50%] right-3 translate-y-[-50%] ${!showPassword && 'hidden'}  `} />
+                                    <AiOutlineEyeInvisible onClick={() => setShowPassword(!showPassword)} className={`fill-slate-500 cursor-pointer size-6 absolute top-[50%] right-3 translate-y-[-50%] ${showPassword && 'hidden'}  `} />
+                                </>
+                            )}
+                        </div>
+                        <p className={`text-xs text-red-500 transition-all  duration-500 ${errors.password ? 'max-h-max h-4 my-1' : 'h-0'}`}>
+                            {errors.password && errors.password.message}
+                        </p>
                     </div>
                     <div className='w-full h-max'>
-                        <Input {...register('confirmPassword')} type='password' placeholder="Confirm Password" className={`w-full h-[50px] border-none bg-slate-200 placeholder:text-xs focus-visible:ring-0  ${errors.confirmPassword && 'border-solid border-red-500'}`} />
-                        <p className='min-h-7 text-xs text-red-500 pt-2'>{errors.confirmPassword && errors.confirmPassword.message}</p>
+                        <div className="w-full h-max relative">
+                            <Input
+                                {...register('confirmPassword')} placeholder="Confirm Password" type={showConfirmPassword ? 'text' : 'password'}
+                                className={`w-full h-[50px] pr-10 border-none bg-slate-200 placeholder:text-xs focus-visible:ring-0  ${errors.password && 'border-solid border-red-500'}`}
+                            />
+                            {watch('confirmPassword') && (
+                                <>
+                                    <AiOutlineEye onClick={() => setConfirmShowPassword(!showConfirmPassword)} className={`fill-slate-500 cursor-pointer size-6 absolute top-[50%] right-3 translate-y-[-50%] ${!showConfirmPassword && 'hidden'}  `} />
+                                    <AiOutlineEyeInvisible onClick={() => setConfirmShowPassword(!showConfirmPassword)} className={`fill-slate-500 cursor-pointer size-6 absolute top-[50%] right-3 translate-y-[-50%] ${showConfirmPassword && 'hidden'}  `} />
+                                </>
+                            )}
+                        </div>
+                        <p className={`text-xs text-red-500 transition-all duration-500 ${errors.confirmPassword ? 'max-h-max h-4 my-1' : 'h-0'}`}>
+                            {errors.confirmPassword && errors.confirmPassword.message}
+                        </p>
                     </div>
                     <Button type='submit' className='w-full h-[50px]'>{isLoading ? "Loading..." : "Sign up"}</Button>
                 </fieldset>
