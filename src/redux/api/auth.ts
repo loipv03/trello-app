@@ -12,6 +12,10 @@ const authApi = createApi({
     tagTypes: ['User'],
     baseQuery: fetchBaseQuery({ baseUrl }),
     endpoints: (builder) => ({
+        activateUser: builder.query<{ message: string }, string>({
+            query: (token) => `activate/${token}`
+        }),
+
         signup: builder.mutation<IAuthRes, ISignup>({
             query: (user) => ({
                 url: 'signup',
@@ -45,4 +49,4 @@ const authApi = createApi({
 export default authApi
 export const authReducer = authApi.reducer
 export const authReducerPath = authApi.reducerPath
-export const { useSignupMutation, useLoginMutation, useLogoutMutation } = authApi;
+export const { useSignupMutation, useLoginMutation, useLogoutMutation, useActivateUserQuery } = authApi;

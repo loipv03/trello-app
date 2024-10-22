@@ -2,11 +2,11 @@
 import { Button } from "@/components/ui/button"
 import { useLogoutMutation } from "@/redux/api/auth"
 import { useRouter } from "next/navigation"
-import { useCallback, useEffect } from "react"
+import { useCallback } from "react"
 
 const Logout = () => {
-    const [logout, { isSuccess }] = useLogoutMutation()
-    
+    const [logout] = useLogoutMutation()
+
     const router = useRouter()
 
     const handleLogout = useCallback(async () => {

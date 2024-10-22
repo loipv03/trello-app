@@ -45,7 +45,7 @@ const SignupForm = () => {
     const onSubmit = async (signupRequest: z.infer<typeof formSchema>) => {
         try {
             await signup(signupRequest).unwrap()
-            router.push('/')
+            router.push('/activate')
         } catch (error) {
             setShowDialog(true)
         }
