@@ -17,7 +17,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
-import { Checkbox } from "@/components/ui/checkbox";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const formSchema = z.object({
     email: z.string().email('Invalid email address'),
@@ -26,7 +26,7 @@ const formSchema = z.object({
 
 
 const LoginForm = () => {
-    const { register, handleSubmit, formState: { errors }, reset } = useForm<z.infer<typeof formSchema>>({
+    const { register, handleSubmit, formState: { errors }, watch } = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
     })
 
@@ -46,33 +46,33 @@ const LoginForm = () => {
     }
 
     return (
-        <div className='w-full h-full lg:p-10 lg:rounded-lg lg:border border-slate-200'>
+        <div className='w-full h-max lg:p-10 lg:rounded-lg lg:border border-slate-200'>
             <div className='lg:block hidden w-full font-semibold text-4xl mb-[30px] text-center'>Login</div>
             <form onSubmit={handleSubmit(onSubmit)} className='w-full h-max'>
                 <fieldset disabled={isLoading} className="w-full h-max grid grid-cols-1 gap-y-4">
                     <div className='w-full h-max'>
-                        <Input {...register('email')} placeholder="Email" className={`w-full h-[50px] border-none bg-slate-200 placeholder:text-xs focus-visible:ring-0  ${errors.email && 'border-solid border-red-500'}`} />
-                        <p className='min-h-7 text-xs text-red-500 pt-2'>{errors.email && errors.email.message}</p>
+                        <Input
+                            {...register('email')} placeholder="Email"
+                            className={`w-full h-[50px] border-none bg-slate-200 placeholder:text-xs focus-visible:ring-0  ${errors.email && 'border-solid border-red-500'}`}
+                        />
+                        <p className={`text-xs text-red-500  transition-all duration-500 ${errors.email ? 'max-h-max h-4 my-1' : 'h-0'}`}>{errors.email && errors.email.message}</p>
                     </div>
                     <div className='w-full h-max'>
-                        <Input {...register('password')} type={showPassword ? 'text' : 'password'} placeholder="Password" className={`w-full h-[50px] border-none bg-slate-200 placeholder:text-xs focus-visible:ring-0  ${errors.password && 'border-solid border-red-500'}`} />
-                        <div className="flex items-center space-x-1 py-3">
-                            <Checkbox
-                                id="showPassword"
-                                className="size-4"
-                                checked={showPassword}
-                                onCheckedChange={(checked: boolean) => setShowPassword(checked)}
+                        <div className="w-full h-max relative">
+                            <Input
+                                {...register('password')} type={showPassword ? 'text' : 'password'} placeholder="Password"
+                                className={`w-full h-[50px] pr-10 border-none bg-slate-200 placeholder:text-xs focus-visible:ring-0  ${errors.password && 'border-solid border-red-500'}`}
                             />
-                            <label
-                                htmlFor="showPassword "
-                                className="text-xs cursor-pointer"
-                            >
-                                Show Password
-                            </label>
+                            {watch('password') && (
+                                <>
+                                    <AiOutlineEye onClick={() => setShowPassword(!showPassword)} className={`fill-slate-500 cursor-pointer size-6 absolute top-[50%] right-3 translate-y-[-50%] ${!showPassword && 'hidden'}  `} />
+                                    <AiOutlineEyeInvisible onClick={() => setShowPassword(!showPassword)} className={`fill-slate-500 cursor-pointer size-6 absolute top-[50%] right-3 translate-y-[-50%] ${showPassword && 'hidden'}  `} />
+                                </>
+                            )}
                         </div>
-                        <p className='min-h-7 text-xs text-red-500'>{errors.password && errors.password.message}</p>
+                        <p className={`text-xs text-red-500 transition-all duration-500 ${errors.password ? 'max-h-max h-4 my-1' : 'h-0'}`}>{errors.password && errors.password.message}</p>
                     </div>
-                    <Button type='submit' className='w-full h-[50px] hover:bg-orange-500'>{isLoading ? "Loading..." : "Login"}</Button>
+                    <Button type='submit' className='w-full h-[50px] mb-2'>{isLoading ? "Loading..." : "Login"}</Button>
                 </fieldset>
             </form>
             <AlertDialog open={showDialog} onOpenChange={setShowDialog}>

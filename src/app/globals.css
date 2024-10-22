@@ -10,6 +10,19 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  input[type="password"]::-ms-reveal {
+    display: none;
+
+  }
+
+  input[type="password"]::-webkit-textfield-decoration-container {
+    display: none;
+  }
+
+  input[type="password"]::-moz-password-eye {
+    display: none;
+  }
 }
 
 @layer base {

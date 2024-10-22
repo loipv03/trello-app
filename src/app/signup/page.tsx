@@ -25,7 +25,7 @@ const Signup = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-full h-full max-h-[625px]">
+                <div className="w-full h-max max-h-[625px]">
                     <SignupForm />
                 </div>
             </div>
