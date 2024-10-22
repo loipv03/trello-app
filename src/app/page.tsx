@@ -1,4 +1,4 @@
-import Logout from "@/app/components/Logout";
+import Logout from "@/app/components/auth/Logout";
 
 export default function Home() {
   return (

@@ -1,15 +1,13 @@
 import Image from "next/image"
-import Logo from '../../../public/Logo.png'
-import Saly from '../../../public/auth_image.png'
+import Saly from '../../../../public/auth_image.png'
 import Link from "next/link"
-import SignupForm from "@/app/signup/signupForm"
+import SignupForm from "@/app/(auth)/signup/signupForm"
+import Logo from "@/app/components/auth/Logo"
 
 const Signup = () => {
     return (
         <div className="w-full h-screen grid lg:grid-rows-[50px_auto] grid-rows-[100px_auto] gap-y-[30px] ">
-            <div className="max-w-full h-full mt-[10px] ml-[10px] grid lg:place-items-start place-items-center">
-                <Image src={Logo} alt="logo" className="lg:w-[200px] w-[250px] h-full object-contain" />
-            </div>
+            <Logo />
             <div className="w-[80%] mx-auto grid lg:grid-cols-[60%_auto] lg:grid-rows-1 grid-rows-[max-content_auto] lg:gap-5 gap-10 h-full">
                 <div className="w-full h-max grid">
                     <div className="w-full h-max lg:relative lg:pt-[20%] ">
