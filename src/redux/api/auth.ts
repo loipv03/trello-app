@@ -10,10 +10,17 @@ interface IAuthRes {
 const authApi = createApi({
     reducerPath: 'user',
     tagTypes: ['User'],
-    baseQuery: fetchBaseQuery({ baseUrl }),
+    baseQuery: fetchBaseQuery({
+        baseUrl,
+        credentials: 'include',
+    }),
     endpoints: (builder) => ({
         activateUser: builder.query<{ message: string }, string>({
             query: (token) => `activate/${token}`
+        }),
+
+        checkLogin: builder.query<{ message: string }, void>({
+            query: () => `user/check_login`
         }),
 
         signup: builder.mutation<IAuthRes, ISignup>({
@@ -29,7 +36,6 @@ const authApi = createApi({
             query: (user) => ({
                 url: 'login',
                 method: "POST",
-                credentials: 'include',
                 body: user
             }),
             invalidatesTags: ['User']
@@ -39,7 +45,6 @@ const authApi = createApi({
             query: () => ({
                 url: 'logout',
                 method: 'post',
-                credentials: 'include',
             }),
             invalidatesTags: ['User']
         }),
@@ -49,4 +54,4 @@ const authApi = createApi({
 export default authApi
 export const authReducer = authApi.reducer
 export const authReducerPath = authApi.reducerPath
-export const { useSignupMutation, useLoginMutation, useLogoutMutation, useActivateUserQuery } = authApi;
+export const { useSignupMutation, useLoginMutation, useLogoutMutation, useActivateUserQuery, useLazyCheckLoginQuery } = authApi;

@@ -2,7 +2,8 @@ import Image from "next/image"
 import Saly from '../../../../public/auth_image.png'
 import Link from "next/link"
 import LoginForm from "@/app/(auth)/login/loginForm"
-import Logo from "@/app/components/auth/Logout"
+import Logo from "@/app/components/auth/Logo"
+
 const Login = () => {
     return (
         <div className="w-full h-screen grid lg:grid-rows-[50px_auto] grid-rows-[100px_auto] gap-y-[30px] ">

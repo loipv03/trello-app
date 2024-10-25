@@ -18,6 +18,7 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import checkLogin from "@/lib/hocs/checkLogin";
 
 const formSchema = z.object({
     email: z.string().email('Invalid email address'),
