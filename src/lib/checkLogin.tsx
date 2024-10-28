@@ -1,8 +1,8 @@
 import { useLazyCheckLoginQuery } from "@/redux/api/auth";
 import { usePathname, useRouter } from "next/navigation";
-import { ComponentType, FC, PropsWithChildren, useEffect, useState } from "react";
+import { ComponentType, FC, useEffect, useState } from "react";
 
-export default function checkLogin<P extends object>(WrappedComponent: ComponentType<P>): FC<PropsWithChildren<P>> {
+export default function checkLogin<P extends object>(WrappedComponent: ComponentType<P>): FC<P> {
     const LoginState = (props: P) => {
         const [isLogin, setIsLogin] = useState<boolean>(false);
 
