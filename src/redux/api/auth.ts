@@ -27,7 +27,7 @@ const authApi = createApi({
             query: (user) => ({
                 url: 'signup',
                 method: "POST",
-                body: user
+                body: user,
             }),
             invalidatesTags: ['User']
         }),

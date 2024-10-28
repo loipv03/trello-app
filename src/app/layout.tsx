@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Noto_Sans } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "@/app/StoreProvider";
 import { Toaster } from "@/components/ui/sonner";
 
-const inter = Poppins({
-  subsets: ['latin'],
+const NotoSans = Noto_Sans({
+  subsets: ['vietnamese'],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
 })
 
@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className}`}
+        className={`${NotoSans.className}`}
       >
         <StoreProvider>
           {children}

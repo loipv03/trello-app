@@ -1,19 +1,10 @@
-import Logout from "@/app/components/auth/Logout";
-import { cookies } from "next/headers";
+import Dashboard from '@/app/dashboard/page'
+import { redirect } from 'next/navigation'
 
 const Home = () => {
-  const cookieStore = cookies()
-
-  const token = cookieStore.getAll()
-
-  console.log(token);
-
-
-  return (
-    <div className="w-full grid justify-center mt-20">
-      <Logout />
-    </div>
-  );
+  return <div>
+    <Dashboard />
+  </div>
 }
 
 export default Home
