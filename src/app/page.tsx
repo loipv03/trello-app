@@ -1,7 +1,11 @@
 import Dashboard from '@/app/dashboard/page'
-import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
 
-const Home = () => {
+const Home = async () => {
+  const cookieStore = await cookies()
+
+  console.log(cookieStore.getAll());
+
   return <div>
     <Dashboard />
   </div>
