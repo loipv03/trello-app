@@ -1,7 +1,6 @@
 "use client"
 
 import Logo from "@/app/components/auth/Logo"
-// import Logo from "@/app/components/auth/Logo"
 import checkLogin from "@/lib/checkLogin"
 
 const Activate = () => {
