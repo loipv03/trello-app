@@ -1,6 +1,5 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import checkLogin from "@/lib/checkLogin"
 import { useLogoutMutation } from "@/redux/api/auth"
 import { useRouter } from "next/navigation"
 import { useCallback } from "react"
@@ -23,4 +22,4 @@ const Logout = () => {
     )
 }
 
-export default checkLogin(Logout)
+export default Logout
