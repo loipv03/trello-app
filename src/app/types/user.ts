@@ -16,3 +16,8 @@ export interface ISignup extends Pick<IUser, 'name' | 'email' | 'password'> {
 export interface ILogin extends Pick<IUser, 'password'> {
     email: string
 }
+
+export interface IToken {
+    access_token: string,
+    refresh_token: string
+}
