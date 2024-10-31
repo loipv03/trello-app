@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { useLoginMutation } from '@/redux/api/auth';
 import {
     AlertDialog,
@@ -30,25 +29,31 @@ const LoginForm = () => {
         resolver: zodResolver(formSchema),
     })
 
-    const router = useRouter()
-
     const [login, { isLoading }] = useLoginMutation()
     const [showDialog, setShowDialog] = useState<boolean>(false)
     const [showPassword, setShowPassword] = useState<boolean>(false)
 
     const onSubmit = async (loginRequest: z.infer<typeof formSchema>) => {
         try {
-            await login(loginRequest).unwrap()
-            await fetch('https://trello-app-8bgh.onrender.com/api', {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            router.push('/');
+            const result = await login(loginRequest).unwrap()
+            if (result.message === "Login success") {
+                console.log(result);
+
+                await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/set_cookie/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        access_token: result.data.access_token,
+                        refresh_token: result.data.refresh_token
+                    })
+                });
+            }
+
         } catch (error) {
             setShowDialog(true)
+            console.log(error);
         }
     }
 

@@ -1,11 +1,8 @@
-"use client"
-
 import Image from "next/image"
 import Saly from '../../../../public/auth_image.png'
 import Link from "next/link"
 import LoginForm from "@/app/(auth)/login/loginForm"
 import Logo from "@/app/components/auth/Logo"
-import checkLogin from "@/lib/checkLogin"
 
 const Login = () => {
     return (
@@ -34,4 +31,4 @@ const Login = () => {
     )
 }
 
-export default checkLogin(Login)
+export default Login

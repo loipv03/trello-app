@@ -1,4 +1,4 @@
-import { ILogin, ISignup } from '@/app/types/user';
+import { ILogin, ISignup, IToken } from '@/app/types/user';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/api`
@@ -19,10 +19,6 @@ const authApi = createApi({
             query: (token) => `activate/${token}`
         }),
 
-        checkLogin: builder.query<{ message: string }, void>({
-            query: () => `user/check_login`
-        }),
-
         signup: builder.mutation<IAuthRes, ISignup>({
             query: (user) => ({
                 url: 'signup',
@@ -32,14 +28,18 @@ const authApi = createApi({
             invalidatesTags: ['User']
         }),
 
-        login: builder.mutation<IAuthRes, ILogin>({
-            query: (user) => ({
-                url: 'login',
-                method: "POST",
-                body: user
+        login: builder.mutation<
+            {
+                data: IToken,
+                message: 'Login success',
+            }, ILogin>({
+                query: (user) => ({
+                    url: 'login',
+                    method: "POST",
+                    body: user
+                }),
+                invalidatesTags: ['User']
             }),
-            invalidatesTags: ['User']
-        }),
 
         logout: builder.mutation<IAuthRes, void>({
             query: () => ({
@@ -54,4 +54,4 @@ const authApi = createApi({
 export default authApi
 export const authReducer = authApi.reducer
 export const authReducerPath = authApi.reducerPath
-export const { useSignupMutation, useLoginMutation, useLogoutMutation, useActivateUserQuery, useLazyCheckLoginQuery } = authApi;
+export const { useSignupMutation, useLoginMutation, useLogoutMutation, useActivateUserQuery } = authApi;

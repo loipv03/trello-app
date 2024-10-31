@@ -1,7 +1,4 @@
-"use client"
-
 import Header from "@/app/components/header/Header"
-import checkLogin from '@/lib/checkLogin'
 import Sidebar from "@/app/components/sidebar/Sidebar"
 import SidebarContent from "@/app/components/sidebar/SidebarContent"
 import { CgTrello } from "react-icons/cg"
@@ -40,4 +37,4 @@ const Dashboard = () => {
     )
 }
 
-export default checkLogin(Dashboard)
+export default Dashboard

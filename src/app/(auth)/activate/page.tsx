@@ -1,7 +1,5 @@
 "use client"
-
 import Logo from "@/app/components/auth/Logo"
-import checkLogin from "@/lib/checkLogin"
 
 const Activate = () => {
     return (
@@ -15,4 +13,4 @@ const Activate = () => {
     )
 }
 
-export default checkLogin(Activate)
+export default Activate
