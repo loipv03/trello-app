@@ -5,13 +5,13 @@ import Link from "next/link"
 
 const Logo = () => {
     return (
-        <div className="min-w-[75px] w-[75px] h-max flex place-items-center">
+        <div className="min-w-[75px] w-[75px] h-full flex place-items-center">
             <Link href={'/'}>
                 <Image
                     src={logo} alt="logo"
                     placeholder="blur"
                     loading="eager"
-                    className="w-full h-[32px] max-h-full object-contain"
+                    className="w-full h-full max-h-full object-contain"
                 />
             </Link>
         </div>

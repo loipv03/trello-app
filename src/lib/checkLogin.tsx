@@ -1,3 +1,4 @@
+import Loading from "@/app/components/Loading";
 import { useLazyCheckLoginQuery } from "@/redux/api/auth";
 import { usePathname, useRouter } from "next/navigation";
 import { ComponentType, FC, useEffect, useState } from "react";
@@ -45,7 +46,7 @@ export default function checkLogin<P extends object>(WrappedComponent: Component
 
         if (!isLogin) {
             return (
-                <div />
+                <Loading />
             )
         }
 
