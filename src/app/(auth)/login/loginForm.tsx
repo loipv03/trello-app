@@ -39,7 +39,7 @@ const LoginForm = () => {
     const onSubmit = async (loginRequest: z.infer<typeof formSchema>) => {
         try {
             await login(loginRequest).unwrap()
-            await fetch('http://localhost:3000/api', {
+            await fetch('https://trello-app-8bgh.onrender.com/api', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
