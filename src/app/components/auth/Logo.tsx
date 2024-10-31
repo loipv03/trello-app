@@ -4,13 +4,13 @@ import Link from "next/link"
 
 const Logo = () => {
     return (
-        <div className="max-w-full h-full mt-[10px] pl-[10px] grid lg:place-items-start place-items-center border border-transparent border-b-slate-200">
-            <Link href={'/'}>
+        <div className="w-full h-full mt-[10px] pl-[10px] border border-transparent border-b-slate-200 grid lg:place-items-start place-items-center">
+            <Link href={'/'} className="size-max">
                 <Image
                     src={logo} alt="logo"
                     placeholder="blur"
                     loading="eager"
-                    className="lg:w-[200px] w-[250px] h-full object-contain"
+                    className="lg:w-[150px] w-[100px] h-full object-contain"
                 />
             </Link>
         </div>

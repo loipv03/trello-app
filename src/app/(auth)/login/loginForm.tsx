@@ -39,6 +39,13 @@ const LoginForm = () => {
     const onSubmit = async (loginRequest: z.infer<typeof formSchema>) => {
         try {
             await login(loginRequest).unwrap()
+            await fetch('http://localhost:3000/api', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
             router.push('/');
         } catch (error) {
             setShowDialog(true)

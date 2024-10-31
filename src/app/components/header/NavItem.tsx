@@ -17,7 +17,9 @@ const NavItem = ({ className }: Iprops) => {
             <DropdownMenu>
                 <DropdownMenuTrigger
                     className="w-max aria-expanded:bg-[#e9f2ff] cursor-pointer aria-expanded:text-[#2168e6] h-full px-3 py-[6px] flex space-x-1 place-items-center outline-none text-sm font-medium text-slate-700 rounded hover:bg-gray-200">
-                    Các Không gian làm việc
+                    <div>
+                        Các Không gian làm việc
+                    </div>
                     <BiChevronDown className="size-6" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="start" className="w-[300px] h-max mt-[5px] p-4 text-slate-700">
