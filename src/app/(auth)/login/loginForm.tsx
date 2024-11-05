@@ -17,6 +17,7 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
     email: z.string().email('Invalid email address'),
@@ -33,12 +34,12 @@ const LoginForm = () => {
     const [showDialog, setShowDialog] = useState<boolean>(false)
     const [showPassword, setShowPassword] = useState<boolean>(false)
 
+    const router = useRouter()
+
     const onSubmit = async (loginRequest: z.infer<typeof formSchema>) => {
         try {
             const result = await login(loginRequest).unwrap()
             if (result.message === "Login success") {
-                console.log(result);
-
                 await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/api/set_cookie/`, {
                     method: 'POST',
                     headers: {
@@ -49,6 +50,7 @@ const LoginForm = () => {
                         refresh_token: result.data.refresh_token
                     })
                 });
+                router.push('/')
             }
 
         } catch (error) {

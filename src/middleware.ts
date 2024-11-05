@@ -9,7 +9,7 @@ export function middleware(req: NextRequest) {
     const isPublicPath = publicPaths.some(path => req.nextUrl.pathname.startsWith(path));
 
     if (accessToken && isPublicPath) {
-        return NextResponse.redirect(new URL('/dashboard', req.url));
+        return NextResponse.redirect(new URL('/', req.url));
     }
 
     if (!accessToken && !isPublicPath) {
