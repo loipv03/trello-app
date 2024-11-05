@@ -1,9 +1,7 @@
-import Dashboard from '@/app/dashboard/page'
+import { redirect } from "next/navigation"
 
 const Home = async () => {
-  return <div>
-    <Dashboard />
-  </div>
+  redirect('/dashboard')
 }
 
 export default Home
