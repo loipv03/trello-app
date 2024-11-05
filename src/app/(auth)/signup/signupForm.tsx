@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import { IError } from '@/app/types/errResponse';
+import { IError } from '@/types/errResponse';
 import { useSignupMutation } from '@/redux/api/auth';
 import {
     AlertDialog,

@@ -1,9 +1,9 @@
-'use client'
+import { PencilLine, Users } from 'lucide-react'
+import Link from 'next/link'
+import React from 'react'
+import { CgTrello } from 'react-icons/cg'
 
-import { PencilLine, Users } from "lucide-react"
-import { CgTrello } from "react-icons/cg"
-
-const Workspace = () => {
+const WorkspaceDetail = () => {
     return (
         <div className="w-full my-10">
             <div className="w-full h-[125px] p-8 flex gap-x-[10px] items-center">
@@ -33,7 +33,9 @@ const Workspace = () => {
                 </div>
                 <div className="grid grid-cols-4 items-end gap-10 my-5">
                     <div className="w-full h-[90px] rounded-md cursor-pointer bg-gradient-to-br from-[#1164bc] to-[#2b92a9]">
-                        <span className="block size-full p-3 text-white font-semibold text-base">Nodejs</span>
+                        <Link href={'66fbf8243e240bfd4606574c/board'}>
+                            <span className="block size-full p-3 text-white font-semibold text-base">Nodejs</span>
+                        </Link>
                     </div>
                     <div className="w-full h-[90px] rounded-md cursor-pointer bg-gradient-to-br from-[#1164bc] to-[#2b92a9]">
                         <span className="block size-full p-3 text-white font-semibold text-base">ReactJs</span>
@@ -50,4 +52,4 @@ const Workspace = () => {
     )
 }
 
-export default Workspace
+export default WorkspaceDetail

@@ -1,4 +1,3 @@
-"use client"
 import Logo from "@/app/components/auth/Logo"
 
 const Activate = () => {

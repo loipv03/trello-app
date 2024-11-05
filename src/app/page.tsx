@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
 
 const Home = async () => {
-  redirect('/dashboard')
+  redirect('/workspace')
 }
 
 export default Home

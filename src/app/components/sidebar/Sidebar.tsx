@@ -10,6 +10,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Settings, Users } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 
 export default function Sidebar() {
@@ -20,9 +21,9 @@ export default function Sidebar() {
                     <span className="text-sm font-semibold text-slate-500 ">Các Không gian làm việc</span>
                     <ul className="my-3">
                         <li className="w-fulltext-sm text-slate-700 font-medium">
-                            <Accordion type="multiple" className="space-y-2">
+                            <Accordion type="single" collapsible defaultValue={'item-1'} className="space-y-2">
                                 <AccordionItem value="item-1" className="border-transparent">
-                                    <AccordionTrigger aria-expanded className={`h-[35px] pl-2 py-[6px] pr-4 aria-expanded:bg-[#e9f2ff] aria-expanded:text-blue-600 aria-expanded:font-semibold rounded-md hover:bg-gray-300 hover:no-underline`}>
+                                    <AccordionTrigger className={`h-[35px] pl-2 py-[6px] pr-4 aria-expanded:bg-[#e9f2ff] aria-expanded:text-blue-600 aria-expanded:font-semibold rounded-md hover:bg-gray-300 hover:no-underline`}>
                                         <div
                                             className={`size-full flex justify-start place-items-center 
                                                 gap-x-3`}>

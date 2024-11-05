@@ -50,7 +50,7 @@ const LoginForm = () => {
                         refresh_token: result.data.refresh_token
                     })
                 });
-                router.push('/dashboard')
+                router.push('/workspace')
             }
 
         } catch (error) {
