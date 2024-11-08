@@ -1,26 +1,23 @@
-import { redirect } from "next/navigation"
-
-const data: string | any[] = [
-    {
-        "_id": "66fbf8243e240bfd4606574c",
-        "name": "workspace 1",
-        "description": "description workspace 1",
-        "boards": [
-            "66fbf82c3e240bfd46065750"
-        ],
-        "members": [
-            {
-                "userId": "66f21db5585fb91a698ca4a3",
-                "role": "admin"
-            }
-        ],
-        "createdAt": "2024-10-01T13:24:52.403Z",
-        "updatedAt": "2024-10-01T13:25:00.940Z"
-    }
-]
+'use client'
+import Loading from "@/app/workspace/[id]/loading"
+import { useGetAllWorkspaceQuery } from "@/redux/api/workspace"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
 const Workspace = () => {
-    data.length && redirect(`/workspace/${data[0]?._id}`)
+    const router = useRouter()
+
+    const { data, isSuccess } = useGetAllWorkspaceQuery()
+
+    useEffect(() => {
+        if (isSuccess && data.length) {
+            router.push(`/workspace/${data[0]._id}`);
+        }
+    }, [isSuccess, data, router]);
+
+    return (
+        <Loading />
+    )
 }
 
 export default Workspace
