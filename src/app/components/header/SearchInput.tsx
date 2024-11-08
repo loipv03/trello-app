@@ -4,12 +4,14 @@ import { BiSearch } from 'react-icons/bi'
 const SearchInput = ({ className }: { className?: string }) => {
     return (
         <div className={`${className}`}>
-            <div className='lg:w-[40%] sm:w-[60%] h-full relative'>
-                <BiSearch className="absolute top-[50%] translate-y-[-50%] left-[8px]" />
+            <div className='size-full relative flex flex-row-reverse'>
+                <div className='h-full aspect-square absolute top-[50%] translate-y-[-50%] right-0 grid place-items-center'>
+                    <BiSearch className="size-4" />
+                </div>
                 <input
-                    type="text" placeholder="Tìm kiếm"
-                    className="size-full border border-[#626f86] rounded-sm placeholder:text-sm placeholder:text-[#626f96] 
-                        pl-[30px] pr-3 outline-none focus:border-blue-500 "
+                    placeholder='Search'
+                    className="size-full md:w-[150px] pl-1 md:pl-3 border border-[#626f86] rounded-md placeholder:text-sm
+                     placeholder:text-[#626f96] outline-none transition-all ease-in-out duration-300 focus:border-blue-500 focus:w-full md:focus:w-[70%]"
                 />
             </div>
         </div>

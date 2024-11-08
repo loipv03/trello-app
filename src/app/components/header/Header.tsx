@@ -9,7 +9,7 @@ const Header = () => {
             <Logo />
             <Nav />
             <div className="w-full flex gap-x-3 justify-end">
-                <SearchInput className="hidden sm:flex w-full h-full gap-x-3 justify-end" />
+                <SearchInput className="hidden md:flex w-full h-full flex-row-reverse" />
                 <ActionIcons />
             </div>
         </div>
