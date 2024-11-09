@@ -1,4 +1,3 @@
-"use client"
 import Image from "next/image"
 import logo from '../../../../public/Logo.png'
 import Link from "next/link"
@@ -9,7 +8,6 @@ const Logo = () => {
             <Link href={'/'}>
                 <Image
                     src={logo} alt="logo"
-                    placeholder="blur"
                     loading="eager"
                     className="w-full h-full max-h-full object-contain"
                 />
